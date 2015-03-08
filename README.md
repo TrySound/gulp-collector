@@ -28,6 +28,23 @@ gulp.task('default', function () {
 - `options.base` ('.') - glob base
 
 
+### Watch optimization
+
+```js
+var gulp = require('gulp'),
+	$ = require('gulp-load-plugins');
+
+gulp.task('default', function () {
+	gulp.src('components/**/index.{html,css}')
+		// Changed file will be associated with other files in directory
+		.pipe($.cached('templates'))
+		.pipe($.collector(buildFn))
+		// Collected files will be restored
+		.pipe($.remember('templates'))
+		.pipe(gulp.dest('dest_folder'));
+});
+```
+
 
 ##License
 
