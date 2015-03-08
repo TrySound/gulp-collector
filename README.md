@@ -13,8 +13,9 @@ var gulp = require('gulp'),
 
 gulp.task('default', function () {
 	gulp.src('components/**/index.{html,css}')
-		.pipe(collector(function (files) {
+		.pipe(collector(function (files, dirname) {
 			// files - object with {filename: content} of files in the same directory
+			// dirname - directory of files
 			if('index.css' in files && 'index.html' in files) {
 				var css = files['index.css'],
 					html = files['index.html'],
