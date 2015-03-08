@@ -52,7 +52,7 @@ function collector(fn, opts) {
 				result;
 
 			if(Object.keys(files).length) {
-				result = fn(extend({}, files));
+				result = fn(extend({}, files), dir);
 
 				if(typeof result === 'object') {
 					Object.keys(result).forEach(function (filename) {
