@@ -13,10 +13,23 @@ var gulp = require('gulp'),
 
 gulp.task('default', function () {
 	gulp.src('components/**/index.{html,css}')
-		.pipe(collector(function (src) {
-			// Src - object with {filename: content} of files in the same directory
-			// return { filename: content }
-			return { 'compiled.html': src['index.html'] + '\n===\n' + src['index.css'] };
+		.pipe(collector(function (files) {
+			// files - object with {filename: content} of files in the same directory
+			if('index.css' in files && 'index.html' in files) {
+				var css = files['index.css'],
+					html = files['index.html'],
+					result;
+
+				// Process html with cheerio
+				// Process css with postcss
+					// Adding prefix to classes
+					// Changing custom tag names
+
+				result = '<style>' + css + '</style>' + html;
+
+				// return { filename: content }
+				return { 'compiled.html': result };
+			}
 		}, options))
 });
 
