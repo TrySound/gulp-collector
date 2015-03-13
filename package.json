@@ -8,7 +8,9 @@
     "gulp-util": "^3.0.4",
     "through2": "^0.6.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "^3.8.11"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
