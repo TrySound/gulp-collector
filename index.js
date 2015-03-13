@@ -1,11 +1,11 @@
 var through = require('through2'),
 	gutil = require('gulp-util'),
 	extend = require('extend'),
-	path_lib = require('path'),
+	pathapi = require('path'),
 	cache = {};
 
 
-function collector(fn, opts) {
+function collector(fn, opts, end) {
 	opts = opts || {};
 	opts.cache = typeof opts.cache === 'string' ? opts.cache : 'default';
 	opts.base = typeof opts.base === 'string' ? opts.base : '.';
@@ -30,7 +30,7 @@ function collector(fn, opts) {
 		}
 
 		if(typeof fn === 'function') {
-			dir = path_lib.dirname(file.path)
+			dir = pathapi.dirname(file.path)
 
 			if( ! (dir in registry)) {
 				registry[dir] = {};
@@ -39,7 +39,7 @@ function collector(fn, opts) {
 			if(active.indexOf(dir) === -1) {
 				active.push(dir);
 			}
-			registry[dir][path_lib.basename(file.path)] = file.contents.toString();
+			registry[dir][pathapi.basename(file.path)] = file.contents.toString();
 		}
 
 		cb();
@@ -62,7 +62,7 @@ function collector(fn, opts) {
 			}
 		});
 
-		if(typeof opts.end === 'function' && typeof (result = opts.end()) === 'object') {
+		if(typeof end === 'function' && typeof (result = end()) === 'object') {
 			Object.keys(result).forEach(function (filename) {
 				push(new gutil.File({
 					path: filename,

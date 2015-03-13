@@ -8,12 +8,10 @@ gulp.task('default', function () {
 			Object.keys(files).forEach(function (filename) {
 				dst += files[filename];
 			});
-		}, {
-			end: function () {
-				return {
-					'result.txt': dst
-				};
-			}
+		}, {}, function () {
+			return {
+				'result.txt': dst
+			};
 		}))
 		.pipe(gulp.dest('dst'));
 });

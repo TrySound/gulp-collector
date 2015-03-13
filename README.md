@@ -1,5 +1,5 @@
 # gulp-collector
-Collect files from pipeline
+Collect files from pipeline by their folder
 
 ## Usage
 
@@ -31,7 +31,7 @@ gulp.task('default', function () {
 				// return { filename: content }
 				return { 'compiled.html': result };
 			}
-		}, options))
+		}, options, end))
 });
 
 ```
@@ -40,8 +40,10 @@ gulp.task('default', function () {
 
 - `options.cache` ('default') - cache namespace
 - `options.base` ('.') - glob base
-- `options.end` - callback function which returns files in the same format
 
+### end callback
+
+Gets and returns files like build function in the final
 
 ### Watch optimization
 
@@ -61,7 +63,7 @@ gulp.task('default', function () {
 ```
 
 
-##License
+## License
 
 [The MIT License (MIT)](LICENSE)
 
