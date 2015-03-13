@@ -40,6 +40,7 @@ gulp.task('default', function () {
 
 - `options.cache` ('default') - cache namespace
 - `options.base` ('.') - glob base
+- `options.end` - callback function which returns files in the same format
 
 
 ### Watch optimization

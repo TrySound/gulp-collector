@@ -45,30 +45,31 @@ function collector(fn, opts) {
 		cb();
 
 	}, function (cb) {
-		var push = this.push.bind(this);
+		var push = this.push.bind(this),
+			result;
 
 		active.forEach(function (dir) {
-			var files = registry[dir],
-				result;
+			var files = registry[dir];
 
-			if(Object.keys(files).length) {
-				result = fn(extend({}, files), dir);
-
-				if(typeof result === 'object') {
-					Object.keys(result).forEach(function (filename) {
-						var file;
-
-						if(filename) {
-							push(new gutil.File({
-								base: opts.base,
-								path: [dir, filename].join('/'),
-								contents: new Buffer(result[filename])
-							}));
-						}
-					});
-				}
+			if(Object.keys(files).length && typeof (result = fn(extend({}, files), dir)) === 'object') {
+				Object.keys(result).forEach(function (filename) {
+					push(new gutil.File({
+						base: opts.base,
+						path: [dir, filename].join('/'),
+						contents: new Buffer(result[filename])
+					}));
+				});
 			}
 		});
+
+		if(typeof opts.end === 'function' && typeof (result = opts.end()) === 'object') {
+			Object.keys(result).forEach(function (filename) {
+				push(new gutil.File({
+					path: filename,
+					contents: new Buffer(result[filename])
+				}));
+			});
+		}
 
 		cb();
 	});

@@ -1,6 +1,6 @@
 {
   "name": "gulp-collector",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Collect files from pipeline",
   "main": "index.js",
   "dependencies": {
